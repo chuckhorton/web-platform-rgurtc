@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="acorn-calc-monthly-payment.css" />
+  <link rel="stylesheet" type="text/css" href="acorn-calc-monthly-payment.min.css" />
   <script async src="https://payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
-  <script async src="acorn-calc-monthly-payment.js"></script>
+  <script async src="acorn-calc-monthly-payment.min.js"></script>
 </head>
 
 <body onload="onLoadPageAcorn()">
@@ -43,7 +43,7 @@
 
         <div class="acorn-input-group">
           <span class="acorn-input-group-text">$</span>
-          <input type="number" id="acorn-amount-input" name="acornAmount" min="1000" max="100000" step="100" autofocus
+          <input type="number" id="acorn-amount-input" name="acornAmount" min="1000" max="100000" step="100"
             oninput="acornUpdatePaymentAmount(this.value)" onkeyup="acornUpdatePaymentAmount(this.value);" />
         </div>
 
@@ -115,13 +115,17 @@
 
           <div class="acorn-row acorn-standard-rates">
             <div class="acorn-col-6" style="padding-left: 0px; margin-left: 0px">
-              <div class="label">Term ranges</div>
-              <div class="value">24–144 months</div>
+              <div class="acorn-label">Term ranges</div>
+              <div class="acorn-value">
+                <span id="acorn-low-term">24</span>-<span id="acorn-high-term">144</span>
+              </div>
             </div>
 
             <div class="acorn-col-6">
-              <div class="label">Loan rate ranges</div>
-              <div class="value">6.99%–36.00%</div>
+              <div class="acorn-label">Loan rate ranges</div>
+              <div class="acorn-value">
+                <span id="acorn-low-rate">6.99</span>%-<span id="acorn-high-rate">36.00</span>%
+              </div>
             </div>
           </div>
           <div class="acorn-disclaimer-text">
@@ -130,7 +134,7 @@
             profile.
           </div>
           <div class="check-your-rate">
-            <div class="acorn-loading acorn-custom-item" id="acorn-custom-button-div" style=""></div>
+            <div class="acorn-loading acorn-custom-item" id="acorn-custom-button-div"></div>
           </div>
           <div class='acorn-custom-promo-text'>
             Checking your rate does not affect your credit score.

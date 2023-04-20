@@ -105,7 +105,6 @@ function setExtraPaymentAmounts () {
   // console.log(laWithLabor, laLaborOnly, laCarShippingOnly, laBoxesOnly)
 }
 
-
 function acornLoadPaymentAmountWidget () {
   // console.log('acornLoadPaymentAmountWidget');
   acornParameters.loanAmount = 3200;
@@ -132,4 +131,39 @@ function acornFormatCurrency (value) {
     minimumFractionDigits: 0,
   });
   return formatted;
+}
+
+let rateRanges = null
+let rateRangesError = false
+let partnerParams = {}
+let rateRangesLoading = false
+acornLoadRateRanges()
+async function acornLoadRateRanges (rateRangesUrl = '') {
+  rateRangesUrl = rateRangesUrl || `https://fs.acornfinance.com/lib/rates/acorn-rate-ranges.json`
+  try {
+    rateRangesLoading = true
+    let response = await fetch(rateRangesUrl)
+    if (response.ok) {
+      rateRanges = await response.json()
+      rateRangesLoading = false
+      acornSetRanges()
+    } else {
+      rateRangesError = true
+      console.log('PayAmt Loaded ERROR else, Can not load:', rateRangesUrl)
+      // postActivityLog('PayAmt Loaded ERROR else', `Can not load: ${rateRangesUrl}`)
+    }
+  }
+  catch {
+    rateRangesError = true
+    console.log('PayAmt Loaded ERROR catch, Can not load:', rateRangesUrl)
+    // postActivityLog('PayAmt Loaded ERROR catch', `Can not load: ${rateRangesUrl}`)
+  }
+}
+
+function acornSetRanges () {
+  // console.log('acornSetRanges Acorn rate ranges loaded', rateRanges)
+  document.getElementById('acorn-low-term').innerHTML = rateRanges.months_low || '24'
+  document.getElementById('acorn-high-term').innerHTML = rateRanges.months_high || '144'
+  document.getElementById('acorn-low-rate').innerHTML = rateRanges.rates_low || '24'
+  document.getElementById('acorn-high-rate').innerHTML = rateRanges.rates_high || '144'
 }
