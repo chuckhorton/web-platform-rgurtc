@@ -1,150 +1,125 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
-    <link rel="stylesheet" type="text/css" href="css/simple-grid.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/full-project.css" />
-    <script
-      async
-      src="https://uat-payment-amount.acornfinance.com/v4/acorn-finance.min.js"
-    ></script>
-    <!-- <link type="text/css" rel="stylesheet" href="https://uat-payment-amount.acornfinance.com/v4/acorn-finance.min.css"> -->
 
-    <script>
-      function onLoadPageAcorn() {
-        acornParameters = {
-          dealerId: 'POD-QUOTE', // POD-FIN-PAGE (needs to be created)
-          companyName: 'PODS', // PODS company name
-          subPurpose: 'Moving',
-          loanAmount: 3200, // Total Estimate or Invoice amount
-          returnURL: window.location.href,
-          env: 'UAT', // Set to UAT for testing or Prod for Production
-          paymentPrefix: 'PAYMENTS STARTING FROM', // FROM
-          paymentSuffix: '/month on',
-          theme: 'box', // light, dark, no-border, box
-          showPromoText: false, // true, false
-          // promoText: "quickly compare offers from top lenders &#8226; no impact to credit score",
-          logging: false,
-        };
-        acornFinance.setAcornParameters(acornParameters);
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/simple-grid.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/full-project.css" />
+  <script async src="https://uat-payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
+  <!-- <link type="text/css" rel="stylesheet" href="https://uat-payment-amount.acornfinance.com/v4/acorn-finance.min.css"> -->
 
-        // add an appropriate event listener
-        window.addEventListener('acorn-payment-widget-click', (e) =>
-          console.log('acorn-payment-widget-click', e.detail.label)
-        );
+  <script>
+    function onLoadPageAcorn () {
+      acornParameters = {
+        dealerId: 'POD-QUOTE', // POD-FIN-PAGE (needs to be created)
+        companyName: 'PODS', // PODS company name
+        subPurpose: 'Moving',
+        loanAmount: 3200, // Total Estimate or Invoice amount
+        returnURL: window.location.href,
+        env: 'UAT', // Set to UAT for testing or Prod for Production
+        paymentPrefix: 'PAYMENTS STARTING FROM', // FROM
+        paymentSuffix: '/month on',
+        theme: 'box', // light, dark, no-border, box
+        showPromoText: false, // true, false
+        // promoText: "quickly compare offers from top lenders &#8226; no impact to credit score",
+        logging: false,
+      };
+      acornFinance.setAcornParameters(acornParameters);
 
-        // Example only, set acornParameters.loanAmount and run CalcPayment() when you have the total price
-        let netType = '3g';
-        if (navigator.connection) {
-          netType = navigator.connection.effectiveType;
+      // add an appropriate event listener
+      window.addEventListener('acorn-payment-widget-click', (e) =>
+        console.log('acorn-payment-widget-click', e.detail.label)
+      );
+
+      // Example only, set acornParameters.loanAmount and run CalcPayment() when you have the total price
+      let netType = '3g';
+      if (navigator.connection) {
+        netType = navigator.connection.effectiveType;
+      }
+      let delay = 300;
+      if (netType === '3g') {
+        delay = 750;
+      } else if (netType === '2g') {
+        delay = 3000;
+      }
+      setTimeout(() => {
+        loadPaymentAmountWidget();
+      }, delay);
+    }
+
+    function updateExtraServices () {
+      var sum = 0;
+      for (i = 0; i < document.listForm.choice.length; i++) {
+        if (document.listForm.choice[i].checked) {
+          sum = sum + parseInt(document.listForm.choice[i].value);
         }
-        let delay = 300;
-        if (netType === '3g') {
-          delay = 750;
-        } else if (netType === '2g') {
-          delay = 3000;
-        }
-        setTimeout(() => {
-          loadPaymentAmountWidget();
-        }, delay);
       }
 
-      function updateExtraServices() {
-        var sum = 0;
-        for (i = 0; i < document.listForm.choice.length; i++) {
-          if (document.listForm.choice[i].checked) {
-            sum = sum + parseInt(document.listForm.choice[i].value);
-          }
-        }
+      const num1 = parseInt(acornParameters.loanAmount);
+      const num2 = parseInt(sum);
+      const updatedLoanAmount = num1 + num2;
+      console.log('amount', document.getElementById('acorn-amount-input').value)
 
-        const num1 = parseInt(acornParameters.loanAmount);
-        const num2 = parseInt(sum);
-        const updatedLoanAmount = num1 + num2;
-        console.log('amount',document.getElementById('acorn-amount-input').value)
+      acornFinance.customCalcPayment(
+        updatedLoanAmount,
+        'acorn-custom-payment-amount-value',
+        'acorn-custom-button-div',
+        'acorn-custom-loan-maxmin',
+        'page',
+        'Check your rate'
+      );
+      document.getElementById("acorn-loan-amount").innerHTML = formatCurrency(updatedLoanAmount);
+    }
 
-        acornFinance.customCalcPayment(
-          updatedLoanAmount,
-          'acorn-custom-payment-amount-value',
-          'acorn-custom-button-div',
-          'acorn-custom-loan-maxmin',
-          'page',
-          'Check your rate'
-        );
-        document.getElementById("acorn-loan-amount").innerHTML = formatCurrency(updatedLoanAmount);
-      }
+    function updatePaymentAmount (value) {
 
-      function updatePaymentAmount(value) {
-        
-        document.getElementById("labor").checked = false;
-        document.getElementById("car_shipping").checked = false;
-        document.getElementById("boxes").checked = false;
+      document.getElementById("labor").checked = false;
+      document.getElementById("car_shipping").checked = false;
+      document.getElementById("boxes").checked = false;
 
-        if (value.length === 0) {
+      if (value.length === 0) {
+        acornParameters.loanAmount = 1;
+      } else {
+        acornParameters.loanAmount = value;
+        if (value == 0) {
           acornParameters.loanAmount = 1;
-        } else {
-          acornParameters.loanAmount = value;
-          if (value == 0) {
-            acornParameters.loanAmount = 1;
-          }
+        }
 
-          var sum = 0;
-          const inputedAmount = parseInt(acornParameters.loanAmount);
-          for (i = 0; i < document.listForm.choice.length; i++) {
-              console.log(document.listForm.choice[1].value,'--', value)
-              sum = parseInt(document.listForm.choice[i].value);
-
-              acornFinance.customCalcPayment(
-                document.listForm.choice[0].value,
-                'item-payment-value-1',
-                'acorn-custom-button-div',
-                'acorn-custom-loan-maxmin',
-                'page',
-                'Check your rate'
-              );
-
-              acornFinance.customCalcPayment(
-                document.listForm.choice[1].value,
-                'item-payment-value-2',
-                'acorn-custom-button-div',
-                'acorn-custom-loan-maxmin',
-                'page',
-                'Check your rate'
-              );
-
-              acornFinance.customCalcPayment(
-                document.listForm.choice[2].value,
-                'item-payment-value-3',
-                'acorn-custom-button-div',
-                'acorn-custom-loan-maxmin',
-                'page',
-                'Check your rate'
-              ); 
-          }
+        var sum = 0;
+        const inputedAmount = parseInt(acornParameters.loanAmount);
+        for (i = 0; i < document.listForm.choice.length; i++) {
+          console.log(document.listForm.choice[1].value, '--', value)
+          sum = parseInt(document.listForm.choice[i].value);
 
           acornFinance.customCalcPayment(
-            acornParameters.loanAmount,
-            'acorn-custom-payment-amount-value',
+            document.listForm.choice[0].value,
+            'item-payment-value-1',
             'acorn-custom-button-div',
             'acorn-custom-loan-maxmin',
             'page',
             'Check your rate'
           );
-          document.getElementById("acorn-loan-amount").innerHTML = formatCurrency(acornParameters.loanAmount);
-        }
-      }
 
-      function loadPaymentAmountWidget() {
-        console.log('loadPaymentAmountWidget');
-        acornParameters.loanAmount = 3200;
-        document.getElementById('acorn-amount-input').value = acornParameters.loanAmount
-        updatePaymentAmount(acornParameters.loanAmount)
-        acornParameters.utm_source = 'Contractor';
-        acornParameters.docSource = 'Finance Page'; // PODS Source Doc
-        acornParameters.docUser = 'Customer'; // Joist's Do User - Customer or Contractor
+          acornFinance.customCalcPayment(
+            document.listForm.choice[1].value,
+            'item-payment-value-2',
+            'acorn-custom-button-div',
+            'acorn-custom-loan-maxmin',
+            'page',
+            'Check your rate'
+          );
+
+          acornFinance.customCalcPayment(
+            document.listForm.choice[2].value,
+            'item-payment-value-3',
+            'acorn-custom-button-div',
+            'acorn-custom-loan-maxmin',
+            'page',
+            'Check your rate'
+          );
+        }
+
         acornFinance.customCalcPayment(
           acornParameters.loanAmount,
           'acorn-custom-payment-amount-value',
@@ -153,180 +128,171 @@
           'page',
           'Check your rate'
         );
+        document.getElementById("acorn-loan-amount").innerHTML = formatCurrency(acornParameters.loanAmount);
       }
+    }
 
-      // Format Number Currency
-      function formatCurrency(value) {
-        let formatted = Number(value).toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          minimumFractionDigits: 0,
-        });
-        return formatted;
-      }
-    </script>
-  </head>
-  <body onload="onLoadPageAcorn()">
-    <div class="acorn-container">
-      <div class="acorn-row" style="display: flex; flex-wrap: wrap">
-        <div class="acorn-col-6 acorn-container-estimate-form" style="flex: 10%">
-          <div class="eyebrow"></div>
-          <div class="main-header">Calculate your monthly payment</div>
-          <div class="intro-text">
-            Whether you’re moving across town or across the country, extra expenses can easily pile up against your moving budget. Use this calculator to determine how a moving loan could help to make sure you are covered.
+    function loadPaymentAmountWidget () {
+      console.log('loadPaymentAmountWidget');
+      acornParameters.loanAmount = 3200;
+      document.getElementById('acorn-amount-input').value = acornParameters.loanAmount
+      updatePaymentAmount(acornParameters.loanAmount)
+      acornParameters.utm_source = 'Contractor';
+      acornParameters.docSource = 'Finance Page'; // PODS Source Doc
+      acornParameters.docUser = 'Customer'; // Joist's Do User - Customer or Contractor
+      acornFinance.customCalcPayment(
+        acornParameters.loanAmount,
+        'acorn-custom-payment-amount-value',
+        'acorn-custom-button-div',
+        'acorn-custom-loan-maxmin',
+        'page',
+        'Check your rate'
+      );
+    }
+
+    // Format Number Currency
+    function formatCurrency (value) {
+      let formatted = Number(value).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+      });
+      return formatted;
+    }
+  </script>
+</head>
+
+<body onload="onLoadPageAcorn()">
+  <div class="acorn-container">
+    <div class="acorn-row" style="display: flex; flex-wrap: wrap">
+      <div class="acorn-col-6 acorn-container-estimate-form" style="flex: 10%">
+        <div class="acorn-eyebrow"></div>
+        <div class="acorn-main-header">Calculate your monthly payment</div>
+        <div class="acorn-intro-text">
+          Whether you’re moving across town or across the country, extra expenses can easily pile up against your moving
+          budget. Use this calculator to determine how a moving loan could help to make sure you are covered.
+        </div>
+
+        <label class="acorn-input-label" for="acornAmount">What is your moving budget?</label>
+
+        <div class="acorn-input-group">
+          <span class="acorn-input-group-text">$</span>
+          <input type="number" id="acorn-amount-input" name="acornAmount" min="1000" max="100000" step="100" autofocus
+            oninput="updatePaymentAmount(this.value)" onkeyup="updatePaymentAmount(this.value);" />
+        </div>
+
+        <div id="acorn-custom-loan-maxmin"></div>
+        <label class="acorn-input-label" for="acornAmount">Save your cash by adding these additional services to your
+          moving
+          loan</label>
+        <form name="listForm">
+          <div class="acorn-checkbox-spacer">
+            <input class="acorn-styled-checkbox" id="labor" name="choice" type="checkbox" value="750"
+              onchange="updateExtraServices()" />
+            <label for="labor" class="acorn-input-label">Labor</span>
+              <span id="labor-readout-text" class="acorn-monthly-incremental-text">
+                Starting from <span id="item-payment-value-1"></span>/mo
+              </span>
+              <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
+              <div class="acorn-monthly-incremental-subtext" ">*Based on a $750 average customer spend for loading and unloading services for PODS customers in 2022</div>
+              </label>
+            </div>
+
+            <div class=" acorn-checkbox-spacer">
+                <input class="acorn-styled-checkbox" id="car_shipping" name="choice" type="checkbox" value="1700"
+                  onchange="updateExtraServices()" />
+                <label for="car_shipping" class="acorn-input-label">Car shipping</span>
+                  <span id="car-shipping-readout-text" class="acorn-monthly-incremental-text">
+                    Starting from <span id="item-payment-value-2"></span>/mo
+                  </span>
+                  <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
+                  <div class="acorn-monthly-incremental-subtext" ">*Based on a $1,700 average customer spend for car shipping services for PODS customers in 2022</div>
+              </label>
+            </div>
+
+            <div class=" acorn-checkbox-spacer">
+                    <input class="acorn-styled-checkbox" id="boxes" name="choice" type="checkbox" value="120"
+                      onchange="updateExtraServices()" />
+                    <label for="boxes" class="acorn-input-label">Boxes</span>
+                      <span id="boxes-readout-text" class="acorn-monthly-incremental-text">
+                        Starting from <span id="item-payment-value-3"></span>/mo
+                      </span>
+                      <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
+                      <div class="acorn-monthly-incremental-subtext" ">*Based on a $119.99 MSRP for a 16ft. container kit on PODSBoxes.com</div>
+              </label>
+
+              <div class=" acorn-disclaimer-text-calculate">*Above pricing varies depending on dates, service/product
+                        chosen,
+                        and locations</div>
+                  </div>
+
+        </form>
+      </div>
+      <div class="acorn-col-6 acorn-result-container" style="flex: 10%">
+        <div style="padding: 40px 60px 30px 60px">
+          <div class="acorn-secondary-heading">Your potential monthly payment*</div>
+
+          <div id="acorn-custom-payment-amount-value" style="color: #0060c0 !important"
+            class="acorn-main-number-result">
+            loading...
           </div>
+          <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
+          <div class="acorn-main-number-result-label">PER MONTH</div>
 
-          <label class="input-label" for="acornAmount"
-            >What is your moving budget?</label
-          >
+          <div class="acorn-row acorn-standard-rates">
+            <div class="acorn-col-6" style="padding-left: 0px; margin-left: 0px">
+              <div class="label">Term ranges</div>
+              <div class="value">24–144 months</div>
+            </div>
 
-          <div class="input-group">
-            <span class="input-group-text">$</span>
-            <input
-              type="number"
-              id="acorn-amount-input"
-              name="acornAmount"
-              min="1000"
-              max="100000"
-              step="100"
-              autofocus
-              oninput="updatePaymentAmount(this.value)"
-              onkeyup="updatePaymentAmount(this.value);"
-            />
+            <div class="acorn-col-6">
+              <div class="label">Loan ranges</div>
+              <div class="value">6.99%–36.00%</div>
+            </div>
           </div>
+          <div class="acorn-disclaimer-text">
+            This estimated monthly payment is based on a loan amount of <span id="acorn-loan-amount">$3200</span> loan
+            term, and APR ranges above. Actual rates, terms and payments will vary based on your personal credit
+            profile.
+          </div>
+          <div class="check-your-rate">
+            <div class="acorn-loading acorn-custom-item" id="acorn-custom-button-div" style=""></div>
+          </div>
+          <div class='acorn-custom-promo-text'>
+            Checking your rate does not affect your credit score.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Acorn Finance Popup -->
+  <div id="acornModalPopup" class="acorn-popup-modal" style="display: none;"></div>
 
+  <!-- Acorn Finance custom block required -->
+  <div id="acorn-custom-layout" style="display: none;">
+    <div class="acorn-custom-block">
+      <div class="acorn-custom-container">
+        <div class="custom-header">
+          <h3 class="acorn-custom-header-title">Finance Your Home Project</h3>
+        </div>
+      </div>
+
+      <div class="acorn-custom-container">
+        <div class="acorn-custom-item">
+          <div class="acorn-payment-prefix-box">PAYMENTS STARTING FROM</div>
+          <div class="acorn-custom-amount-div">
+            <span id="acorn-custom-payment-amount">loading...</span><span
+              class="acorn-custom-payment-amount-suffix">/month on</span>
+          </div>
           <div id="acorn-custom-loan-maxmin"></div>
-          <label class="input-label" for="acornAmount"
-            >Save your cash by adding these additional services to your moving loan</label
-          >
-          <form name="listForm">
-            <div class="checkbox-spacer">
-              <input
-                class="styled-checkbox"
-                id="labor"
-                name="choice"
-                type="checkbox"
-                value="750"
-                onchange="updateExtraServices()"
-              />
-              <label for="labor" class="input-label">Labor</span>
-                <span id="labor-readout-text" class="monthly-incremental-text">
-                  Starting from <span id="item-payment-value-1"></span>/mo
-                </span>
-                <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-                <div class="monthly-incremental-subtext" ">*Based on a $750 average customer spend for loading and unloading services for PODS customers in 2022</div>
-              </label>
-            </div>
-
-            <div class="checkbox-spacer">
-              <input
-                class="styled-checkbox"
-                id="car_shipping"
-                name="choice"
-                type="checkbox"
-                value="1700"
-                onchange="updateExtraServices()"
-              />
-              <label for="car_shipping" class="input-label">Car shipping</span>
-                <span id="car-shipping-readout-text" class="monthly-incremental-text">
-                  Starting from <span id="item-payment-value-2"></span>/mo
-                </span>
-                <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-                <div class="monthly-incremental-subtext" ">*Based on a $1,700 average customer spend for car shipping services for PODS customers in 2022</div>
-              </label>
-            </div>
-
-            <div class="checkbox-spacer">
-              <input
-                class="styled-checkbox"
-                id="boxes"
-                name="choice"
-                type="checkbox"
-                value="120"
-                onchange="updateExtraServices()"
-              />
-              <label for="boxes" class="input-label">Boxes</span>
-                <span id="boxes-readout-text" class="monthly-incremental-text">
-                  Starting from <span id="item-payment-value-3"></span>/mo
-                </span>
-                <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-                <div class="monthly-incremental-subtext" ">*Based on a $119.99 MSRP for a 16ft. container kit on PODSBoxes.com</div>
-              </label>
-
-              <div class="disclaimer-text-calculate">*Above pricing varies depending on dates, service/product chosen, and locations</div>
-            </div>
-           
-          </form>
+          <div><img class="acorn-bottom-logo"
+              src="https://payment-amount.acornfinance.com/v4/acorn-logo-tagline-h-small.png"></div>
         </div>
-        <div class="acorn-col-6 acorn-result-container" style="flex: 10%">
-          <div style="padding: 40px 60px 30px 60px">
-            <div class="secondary-heading">Your potential monthly payment*</div>
-
-            <div
-              id="acorn-custom-payment-amount-value"
-              style="color: #0060c0 !important"
-              class="main-number-result"
-            >
-              loading...
-            </div>
-            <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-            <div class="main-number-result-label">PER MONTH</div>
-
-            <div class="acorn-row acorn-standard-rates">
-              <div class="acorn-col-6" style="padding-left: 0px; margin-left: 0px">
-                <div class="label">Term ranges</div>
-                <div class="value">24–144 months</div>
-              </div>
-
-              <div class="acorn-col-6">
-                <div class="label">Loan ranges</div>
-                <div class="value">6.99%–36.00%</div>
-              </div>
-            </div>
-            <div class="disclaimer-text">
-              This estimated monthly payment is based on a loan amount of <span id="acorn-loan-amount">$3200</span> loan term, and APR ranges above. Actual rates, terms and payments will vary based on your personal credit profile.
-            </div>
-            <div class="check-your-rate">
-              <div
-                class="acorn-loading acorn-custom-item"
-                id="acorn-custom-button-div"
-                style=""
-              ></div>
-            </div>
-            <div class='acorn-custom-promo-text'>
-              Checking your rate does not affect your credit score.
-            </div>
-          </div>
+        <div class="acorn-loading acorn-custom-item" id="acorn-custom-button-div">
         </div>
       </div>
     </div>
-     <!-- Acorn Finance Popup -->
-     <div id="acornModalPopup" class="acorn-popup-modal" style="display: none;"></div>
-     
-     <!-- Acorn Finance custom block required -->
-     <div id="acorn-custom-layout" style="display: none;">
-      <div class="acorn-custom-block">
-        <div class="acorn-custom-container">
-          <div class="custom-header">
-            <h3 class="acorn-custom-header-title">Finance Your Home Project</h3>
-          </div>
-        </div>
+  </div>
+</body>
 
-        <div class="acorn-custom-container">
-          <div class="acorn-custom-item">
-            <div class="acorn-payment-prefix-box">PAYMENTS STARTING FROM</div>
-            <div class="acorn-custom-amount-div">
-              <span id="acorn-custom-payment-amount">loading...</span><span
-                class="acorn-custom-payment-amount-suffix">/month on</span>
-            </div>
-            <div id="acorn-custom-loan-maxmin"></div>
-            <div><img class="acorn-bottom-logo"
-                src="https://payment-amount.acornfinance.com/v4/acorn-logo-tagline-h-small.png"></div>
-          </div>
-          <div class="acorn-loading acorn-custom-item" id="acorn-custom-button-div">
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
 </html>
