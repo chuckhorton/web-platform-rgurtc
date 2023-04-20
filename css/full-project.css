@@ -1,6 +1,10 @@
 /* @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'); */
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800|Open+Sans:400,700');
 
+body {
+  margin: 0;
+}
+
 .acorn-container>* {
   box-sizing: border-box;
 }
@@ -8,7 +12,7 @@
 .acorn-container {
   width: 100%;
   max-width: 1280px;
-  margin: 10px;
+  margin: 10px auto;
   height: auto;
   border: 1px solid #c6cdd4;
   border-radius: 3px;
@@ -29,7 +33,7 @@
 }
 
 .acorn-container-estimate-form {
-  padding: 40px;
+  padding: 30px;
 }
 
 .acorn-secondary-heading {
@@ -65,6 +69,10 @@
   background-color: #e9f3f6;
   float: right !important;
   min-height: 600px !important;
+}
+
+.acorn-result-container2 {
+  padding: 30px 60px 30px 60px
 }
 
 .acorn-standard-rates {
@@ -113,12 +121,11 @@
 }
 
 .acorn-disclaimer-text-calculate {
-  margin-top: 30px;
-  font-size: 12px !important;
-  line-height: 1.4em !important;
-  font-weight: 200 !important;
   font-family: var(--font-family-nunito_sans) !important;
-  padding-bottom: 0px;
+  font-size: 10px;
+  font-weight: 200 !important;
+  margin-top: 20px;
+  margin-left: 0px;
 }
 
 .acorn-eyebrow {
@@ -191,7 +198,8 @@
 .acorn-monthly-incremental-subtext {
   margin-left: 30px;
   font-weight: 200;
-  font-size: 12px;
+  font-size: 9px;
+  line-height: 1.4em;
 }
 
 .acorn-checkbox-container input {
@@ -301,6 +309,27 @@
   margin-top: -10px;
 }
 
+.acorn-results-btn {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 2px solid #0060c0;
+  display: inline-block;
+  cursor: pointer;
+  color: #0060c0;
+  font-family: var(--font-family-nunito_sans) !important;
+  font-size: 16px;
+  padding: 15px 0px;
+  text-align: center;
+  text-decoration: none;
+  width: 100% !important;
+  margin-top: 15px;
+  text-shadow: 0px 1px 0px #0060c0;
+}
+
+.acorn-results-btn:hover {
+  background-color: transparent;
+}
+
 @media all and (min-width: 700px) and (max-width: 1400px) {
   .acorn-result-container {
     width: 100% !important;
@@ -334,6 +363,12 @@
 
   .acorn-container-estimate-form {
     flex: 80% !important;
+  }
+}
+
+@media all and (min-width: 700px) {
+  .acorn-hide-desktop {
+    display: none !important;
   }
 }
 
