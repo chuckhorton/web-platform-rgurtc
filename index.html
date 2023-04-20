@@ -4,15 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="css/simple-grid.min.css" />
   <link rel="stylesheet" type="text/css" href="css/full-project.css" />
-  <script async src="https://uat-payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
-  <!-- <link type="text/css" rel="stylesheet" href="https://uat-payment-amount.acornfinance.com/v4/acorn-finance.min.css"> -->
+  <script async src="https://payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
 
+  <!-- Calculate your monthly payment Javascript -->
   <script>
     function onLoadPageAcorn () {
       acornParameters = {
-        dealerId: 'POD-QUOTE', // POD-FIN-PAGE (needs to be created)
+        dealerId: 'POD-WEBSITE-LP', // POD-WEBSITE-LP (needs to be created)
         companyName: 'PODS', // PODS company name
         subPurpose: 'Moving',
         loanAmount: 3200, // Total Estimate or Invoice amount
@@ -28,9 +27,9 @@
       acornFinance.setAcornParameters(acornParameters);
 
       // add an appropriate event listener
-      window.addEventListener('acorn-payment-widget-click', (e) =>
-        console.log('acorn-payment-widget-click', e.detail.label)
-      );
+      // window.addEventListener('acorn-payment-widget-click', (e) =>
+      //   console.log('acorn-payment-widget-click', e.detail.label)
+      // );
 
       // Example only, set acornParameters.loanAmount and run CalcPayment() when you have the total price
       let netType = '3g';
@@ -163,6 +162,8 @@
 </head>
 
 <body onload="onLoadPageAcorn()">
+
+  <!-- Acorn Calculate your monthly payment HTML -->
   <div class="acorn-container">
     <div class="acorn-row" style="display: flex; flex-wrap: wrap">
       <div class="acorn-col-6 acorn-container-estimate-form" style="flex: 10%">
@@ -301,6 +302,8 @@
       </div>
     </div>
   </div>
+
+
 </body>
 
 </html>
