@@ -80,7 +80,7 @@ body {
   margin-left: 0px;
 }
 
-.acorn-standard-rates .label {
+.acorn-standard-rates .acorn-label {
   font-family: var(--font-family-nunito_sans) !important;
   font-size: 12px;
   font-weight: 700;
@@ -89,7 +89,7 @@ body {
   color: #808080 !important;
 }
 
-.acorn-standard-rates .value {
+.acorn-standard-rates .acorn-value {
   font-family: var(--font-family-nunito_sans) !important;
   font-size: 22px;
   font-size: 200;
