@@ -75,40 +75,6 @@ function acornUpdatePaymentAmount (value) {
       acornParameters.loanAmount = 1;
     }
 
-    var sum = 0;
-    const inputedAmount = parseInt(acornParameters.loanAmount);
-    for (i = 0; i < document.listForm.choice.length; i++) {
-      console.log(document.listForm.choice[1].value, '--', value)
-      sum = parseInt(document.listForm.choice[i].value);
-
-      acornFinance.customCalcPayment(
-        document.listForm.choice[0].value,
-        'item-payment-value-1',
-        'acorn-custom-button-div',
-        'acorn-custom-loan-maxmin',
-        'page',
-        'Check your rate'
-      );
-
-      acornFinance.customCalcPayment(
-        document.listForm.choice[1].value,
-        'item-payment-value-2',
-        'acorn-custom-button-div',
-        'acorn-custom-loan-maxmin',
-        'page',
-        'Check your rate'
-      );
-
-      acornFinance.customCalcPayment(
-        document.listForm.choice[2].value,
-        'item-payment-value-3',
-        'acorn-custom-button-div',
-        'acorn-custom-loan-maxmin',
-        'page',
-        'Check your rate'
-      );
-    }
-
     acornFinance.customCalcPayment(
       acornParameters.loanAmount,
       'acorn-custom-payment-amount-value',
@@ -118,8 +84,27 @@ function acornUpdatePaymentAmount (value) {
       'Check your rate'
     );
     document.getElementById("acorn-loan-amount").innerHTML = acornFormatCurrency(acornParameters.loanAmount);
+    setExtraPaymentAmounts()
   }
 }
+
+function setExtraPaymentAmounts () {
+  // Labor
+  console.log('setExtraPaymentAmounts', acornParameters.loanAmount)
+  let laOnly = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount))
+  let laWithLabor = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 750)
+  let laWithCarShipping = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 1700)
+  let laWithBoxes = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 120)
+  let laLaborOnly = laWithLabor.value - laOnly.value
+  let laCarShippingOnly = laWithCarShipping.value - laOnly.value
+  let laBoxesOnly = laWithBoxes.value - laOnly.value
+  // acorn-labor-only-payment
+  document.getElementById('acorn-labor-only-payment').innerHTML = laLaborOnly
+  document.getElementById('acorn-car-shipping-only-payment').innerHTML = laCarShippingOnly
+  document.getElementById('acorn-boxes-only-payment').innerHTML = laBoxesOnly
+  console.log(laWithLabor, laLaborOnly, laCarShippingOnly, laBoxesOnly)
+}
+
 
 function acornLoadPaymentAmountWidget () {
   console.log('acornLoadPaymentAmountWidget');
