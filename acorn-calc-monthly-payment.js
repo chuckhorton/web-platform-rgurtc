@@ -48,7 +48,7 @@ function acornUpdateExtraServices () {
   const num1 = parseInt(acornParameters.loanAmount);
   const num2 = parseInt(sum);
   const updatedLoanAmount = num1 + num2;
-  console.log('amount', document.getElementById('acorn-amount-input').value)
+  // console.log('amount', document.getElementById('acorn-amount-input').value)
 
   acornFinance.customCalcPayment(
     updatedLoanAmount,
@@ -56,7 +56,7 @@ function acornUpdateExtraServices () {
     'acorn-custom-button-div',
     'acorn-custom-loan-maxmin',
     'page',
-    'Check your rate'
+    'Check offers at Acorn Finance'
   );
   document.getElementById("acorn-loan-amount").innerHTML = acornFormatCurrency(updatedLoanAmount);
 }
@@ -81,7 +81,7 @@ function acornUpdatePaymentAmount (value) {
       'acorn-custom-button-div',
       'acorn-custom-loan-maxmin',
       'page',
-      'Check your rate'
+      'Check offers at Acorn Finance'
     );
     document.getElementById("acorn-loan-amount").innerHTML = acornFormatCurrency(acornParameters.loanAmount);
     setExtraPaymentAmounts()
@@ -90,7 +90,7 @@ function acornUpdatePaymentAmount (value) {
 
 function setExtraPaymentAmounts () {
   // Labor
-  console.log('setExtraPaymentAmounts', acornParameters.loanAmount)
+  // console.log('setExtraPaymentAmounts', acornParameters.loanAmount)
   let laOnly = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount))
   let laWithLabor = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 750)
   let laWithCarShipping = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 1700)
@@ -99,15 +99,15 @@ function setExtraPaymentAmounts () {
   let laCarShippingOnly = laWithCarShipping.value - laOnly.value
   let laBoxesOnly = laWithBoxes.value - laOnly.value
   // acorn-labor-only-payment
-  document.getElementById('acorn-labor-only-payment').innerHTML = laLaborOnly
-  document.getElementById('acorn-car-shipping-only-payment').innerHTML = laCarShippingOnly
-  document.getElementById('acorn-boxes-only-payment').innerHTML = laBoxesOnly
-  console.log(laWithLabor, laLaborOnly, laCarShippingOnly, laBoxesOnly)
+  document.getElementById('acorn-labor-only-payment').innerHTML = '$' + laLaborOnly
+  document.getElementById('acorn-car-shipping-only-payment').innerHTML = '$' + laCarShippingOnly
+  document.getElementById('acorn-boxes-only-payment').innerHTML = '$' + laBoxesOnly
+  // console.log(laWithLabor, laLaborOnly, laCarShippingOnly, laBoxesOnly)
 }
 
 
 function acornLoadPaymentAmountWidget () {
-  console.log('acornLoadPaymentAmountWidget');
+  // console.log('acornLoadPaymentAmountWidget');
   acornParameters.loanAmount = 3200;
   document.getElementById('acorn-amount-input').value = acornParameters.loanAmount
   acornUpdatePaymentAmount(acornParameters.loanAmount)
@@ -120,7 +120,7 @@ function acornLoadPaymentAmountWidget () {
     'acorn-custom-button-div',
     'acorn-custom-loan-maxmin',
     'page',
-    'Check your rate'
+    'Check offers at Acorn Finance'
   );
 }
 
