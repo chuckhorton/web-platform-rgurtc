@@ -182,9 +182,9 @@
         </div>
 
         <div id="acorn-custom-loan-maxmin"></div>
-        <label class="acorn-input-label" for="acornAmount">Save your cash by adding these additional services to your
-          moving
-          loan</label>
+        <label class="acorn-input-label" for="acornAmount">
+          Save your cash by adding these additional services to your moving loan
+        </label>
         <form name="listForm">
           <div class="acorn-checkbox-spacer">
             <input class="acorn-styled-checkbox" id="labor" name="choice" type="checkbox" value="750"
@@ -194,37 +194,45 @@
                 Starting from <span id="item-payment-value-1"></span>/mo
               </span>
               <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-              <div class="acorn-monthly-incremental-subtext" ">*Based on a $750 average customer spend for loading and unloading services for PODS customers in 2022</div>
-              </label>
+              <div class="acorn-monthly-incremental-subtext">
+                *Based on a $750 average customer spend for loading and unloading services for PODS customers in 2022
+              </div>
+            </label>
+          </div>
+
+          <div class=" acorn-checkbox-spacer">
+            <input class="acorn-styled-checkbox" id="car_shipping" name="choice" type="checkbox" value="1700"
+              onchange="updateExtraServices()" />
+            <label for="car_shipping" class="acorn-input-label">Car shipping</span>
+              <span id="car-shipping-readout-text" class="acorn-monthly-incremental-text">
+                Starting from <span id="item-payment-value-2"></span>/mo
+              </span>
+              <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
+              <div class="acorn-monthly-incremental-subtext">
+                *Based on a $1,700 average customer spend for car shipping services for PODS customers in 2022
+              </div>
+            </label>
+          </div>
+
+          <div class=" acorn-checkbox-spacer">
+            <input class="acorn-styled-checkbox" id="boxes" name="choice" type="checkbox" value="120"
+              onchange="updateExtraServices()" />
+            <label for="boxes" class="acorn-input-label">Boxes</span>
+              <span id="boxes-readout-text" class="acorn-monthly-incremental-text">
+                Starting from <span id="item-payment-value-3"></span>/mo
+              </span>
+              <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
+              <div class="acorn-monthly-incremental-subtext">
+                *Based on a $119.99 MSRP for a 16ft. container kit on PODSBoxes.com
+              </div>
+            </label>
+
+            <div class=" acorn-disclaimer-text-calculate">
+              *Above pricing varies depending on dates, service/product chosen, and locations
             </div>
+          </div>
 
-            <div class=" acorn-checkbox-spacer">
-                <input class="acorn-styled-checkbox" id="car_shipping" name="choice" type="checkbox" value="1700"
-                  onchange="updateExtraServices()" />
-                <label for="car_shipping" class="acorn-input-label">Car shipping</span>
-                  <span id="car-shipping-readout-text" class="acorn-monthly-incremental-text">
-                    Starting from <span id="item-payment-value-2"></span>/mo
-                  </span>
-                  <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-                  <div class="acorn-monthly-incremental-subtext" ">*Based on a $1,700 average customer spend for car shipping services for PODS customers in 2022</div>
-              </label>
-            </div>
-
-            <div class=" acorn-checkbox-spacer">
-                    <input class="acorn-styled-checkbox" id="boxes" name="choice" type="checkbox" value="120"
-                      onchange="updateExtraServices()" />
-                    <label for="boxes" class="acorn-input-label">Boxes</span>
-                      <span id="boxes-readout-text" class="acorn-monthly-incremental-text">
-                        Starting from <span id="item-payment-value-3"></span>/mo
-                      </span>
-                      <span class="acorn-custom-payment-amount-suffix" style="display: none;"></span>
-                      <div class="acorn-monthly-incremental-subtext" ">*Based on a $119.99 MSRP for a 16ft. container kit on PODSBoxes.com</div>
-              </label>
-
-              <div class=" acorn-disclaimer-text-calculate">*Above pricing varies depending on dates, service/product
-                        chosen,
-                        and locations</div>
-                  </div>
+          <a href="#acorn-scroll-target" class="acorn-results-btn acorn-hide-desktop">See results</a>
 
         </form>
       </div>
