@@ -374,7 +374,7 @@ body {
 
 @media all and (max-width: 460px) {
   .acorn-result-container {
-    padding-bottom: 90px !important;
+    padding-bottom: 30px !important;
   }
 }
 
