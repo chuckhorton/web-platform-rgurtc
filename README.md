@@ -33,15 +33,16 @@ Open index.html for example and code copying
 
 4. PASTE CODE below PODS How Acorn Finance Works section and See how financing can help with your move in PODS' financing page
 
+
 5. Verify Your potential monthly payment amount is working
     - Change: What is your moving budget value
     - Click Labor
     - Click Car shipping
     - Click Boxes
+    
 
 6. Verify Check offers at Acorn Finance button is working by clicking on it
     - Should open new tab and show Acorn Finance calculator page with PODS logo in upper right corner
-    
 
 7. Share PODS Financing page link with Acorn to have Acorn review and test
 
