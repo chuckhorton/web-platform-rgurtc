@@ -164,6 +164,11 @@ function acornSetRanges () {
   // console.log('acornSetRanges Acorn rate ranges loaded', rateRanges)
   document.getElementById('acorn-low-term').innerHTML = rateRanges.months_low || '24'
   document.getElementById('acorn-high-term').innerHTML = rateRanges.months_high || '144'
-  document.getElementById('acorn-low-rate').innerHTML = rateRanges.rates_low || '24'
-  document.getElementById('acorn-high-rate').innerHTML = rateRanges.rates_high || '144'
+  document.getElementById('acorn-low-rate').innerHTML = rateRanges.rates_low || '6.99'
+  document.getElementById('acorn-high-rate').innerHTML = rateRanges.rates_high || '36.00'
+}
+
+function acornScrollToTarget () {
+  const element = document.getElementById("acorn-scroll-target");
+  element.scrollIntoView();
 }
