@@ -1,25 +1,25 @@
 // < Calculate your monthly payment Javascript
 function onLoadPageAcorn () {
   acornParameters = {
-    dealerId: 'POD-WEBSITE-LP', // POD-WEBSITE-LP (needs to be created)
+    dealerId: 'POD-WEBSITE-LP', // POD-WEBSITE-LP 
     companyName: 'PODS', // PODS company name
     subPurpose: 'Moving',
     loanAmount: 3200, // Total Estimate or Invoice amount
     returnURL: window.location.href,
-    env: 'UAT', // Set to UAT for testing or Prod for Production
+    env: 'Prod', // Set to UAT for testing or Prod for Production
     paymentPrefix: 'PAYMENTS STARTING FROM', // FROM
     paymentSuffix: '/month on',
     theme: 'box', // light, dark, no-border, box
     showPromoText: false, // true, false
     // promoText: "quickly compare offers from top lenders &#8226; no impact to credit score",
-    logging: false,
+    logging: true,
   };
   acornFinance.setAcornParameters(acornParameters);
 
   // add an appropriate event listener
-  // window.addEventListener('acorn-payment-widget-click', (e) =>
-  //   console.log('acorn-payment-widget-click', e.detail.label)
-  // );
+  window.addEventListener('acorn-payment-widget-click', (e) =>
+    console.log('acorn-payment-widget-click', e.detail.label)
+  );
 
   // Example only, set acornParameters.loanAmount and run CalcPayment() when you have the total price
   let netType = '3g';
