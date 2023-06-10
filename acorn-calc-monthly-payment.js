@@ -91,10 +91,23 @@ function acornUpdatePaymentAmount (value) {
 function setExtraPaymentAmounts () {
   // Labor
   // console.log('setExtraPaymentAmounts', acornParameters.loanAmount)
-  let laOnly = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount))
-  let laWithLabor = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 750)
-  let laWithCarShipping = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 1700)
-  let laWithBoxes = acornFinance.calcLowPayment(parseInt(acornParameters.loanAmount) + 120)
+  let lowLoanAmount = 1000
+  let loanAmount = parseInt(acornParameters.loanAmount)
+  if (loanAmount < 5000) {
+    lowLoanAmount = 1000
+  } else if ((loanAmount < 10000)) {
+    lowLoanAmount = 5000
+  } else if ((loanAmount < 25000)) {
+    lowLoanAmount = 10000
+  } else if ((loanAmount < 50000)) {
+    lowLoanAmount = 25000
+  } else if ((loanAmount < 120000)) {
+    lowLoanAmount = 50000
+  }
+  let laOnly = acornFinance.calcLowPayment(lowLoanAmount)
+  let laWithLabor = acornFinance.calcLowPayment(lowLoanAmount + 750)
+  let laWithCarShipping = acornFinance.calcLowPayment(lowLoanAmount + 1700)
+  let laWithBoxes = acornFinance.calcLowPayment(lowLoanAmount + 120)
   let laLaborOnly = laWithLabor.value - laOnly.value
   let laCarShippingOnly = laWithCarShipping.value - laOnly.value
   let laBoxesOnly = laWithBoxes.value - laOnly.value
@@ -102,7 +115,7 @@ function setExtraPaymentAmounts () {
   document.getElementById('acorn-labor-only-payment').innerHTML = '$' + laLaborOnly
   document.getElementById('acorn-car-shipping-only-payment').innerHTML = '$' + laCarShippingOnly
   document.getElementById('acorn-boxes-only-payment').innerHTML = '$' + laBoxesOnly
-  // console.log(laWithLabor, laLaborOnly, laCarShippingOnly, laBoxesOnly)
+  // console.log(acornParameters.loanAmount, lowLoanAmount, laLaborOnly, laCarShippingOnly, laBoxesOnly)
 }
 
 function acornLoadPaymentAmountWidget () {
