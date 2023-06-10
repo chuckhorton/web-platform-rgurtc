@@ -1,4 +1,4 @@
-/* @import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'); */
+/* Acorn PODS CSS */
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700,800|Open+Sans:400,700');
 
 body {
@@ -87,12 +87,12 @@ body {
   text-transform: uppercase;
   margin-bottom: 10px;
   color: #808080 !important;
+  white-space: nowrap;
 }
 
 .acorn-standard-rates .acorn-value {
   font-family: var(--font-family-nunito_sans) !important;
   font-size: 22px;
-  font-size: 200;
   margin-bottom: 20px;
 }
 
