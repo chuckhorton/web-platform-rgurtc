@@ -1,8 +1,10 @@
 # PODS Financing Page
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/web-platform-rgurtc)
+[See on StackBlitz ⚡️](https://stackblitz.com/edit/web-platform-rgurtc)
 
 Final PODS Calculate your monthly payment code snippet for PODS Financing Page
+
+2023-06-09 version 1.1.0 - Fix add-on calcs
 
 2023-04-20 version 1.0.0 - First production ready version
 
@@ -33,13 +35,11 @@ Open index.html for example and code copying
 
 4. PASTE CODE below PODS How Acorn Finance Works section and See how financing can help with your move in PODS' financing page
 
-
 5. Verify Your potential monthly payment amount is working
     - Change: What is your moving budget value
     - Click Labor
     - Click Car shipping
     - Click Boxes
-    
 
 6. Verify Check offers at Acorn Finance button is working by clicking on it
     - Should open new tab and show Acorn Finance calculator page with PODS logo in upper right corner
