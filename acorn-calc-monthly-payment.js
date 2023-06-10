@@ -1,3 +1,12 @@
+// Acorn Finance Loan Payment Calculator
+// Copyright © 2023 by Acorn Finance. All rights reserved
+// Unauthorized copying of this file, via any medium is strictly prohibited
+// Proprietary and confidential
+// THIS CODE IS PROVIDED ON AN * AS IS * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+// WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+// MERCHANTABILITY OR NON-INFRINGEMENT.
+
 // < Calculate your monthly payment Javascript
 function onLoadPageAcorn () {
   acornParameters = {
