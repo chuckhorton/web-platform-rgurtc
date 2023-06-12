@@ -57,7 +57,7 @@ function acornUpdateExtraServices () {
   const num1 = parseInt(acornParameters.loanAmount);
   const num2 = parseInt(sum);
   const updatedLoanAmount = num1 + num2;
-  // console.log('amount', document.getElementById('acorn-amount-input').value)
+  // console.log('amount', document.getElementById('acorn-amount-input').value, updatedLoanAmount, num1, num2)
 
   acornFinance.customCalcPayment(
     updatedLoanAmount,
@@ -73,7 +73,7 @@ function acornUpdateExtraServices () {
 function acornUpdatePaymentAmount (value) {
 
   document.getElementById("labor").checked = false;
-  document.getElementById("car_shipping").checked = false;
+  document.getElementById("car-shipping").checked = false;
   document.getElementById("boxes").checked = false;
 
   if (value.length === 0) {

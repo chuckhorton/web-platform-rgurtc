@@ -4,6 +4,10 @@
 
 Final PODS Calculate your monthly payment code snippet for PODS Financing Page
 
+2023-06-12 version 1.3.0 - Change to hide Start from for extras
+
+2023-06-10 version 1.2.0 - Change to use min js, fix font size error, fix label wrapping
+
 2023-06-09 version 1.1.0 - Fix add-on calcs
 
 2023-04-20 version 1.0.0 - First production ready version
@@ -19,7 +23,7 @@ Open index.html for example and code copying
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="acorn-calc-monthly-payment.min.css" />
   <script async src="https://payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
-  <script async src="acorn-calc-monthly-payment.js"></script>
+  <script async src="acorn-calc-monthly-payment-min.js"></script>
 </head>
 ```
 
