@@ -4,6 +4,8 @@
 
 Final PODS Calculate your monthly payment code snippet for PODS Financing Page
 
+2023-06-13 version 1.4.0 - Add x year term to description
+
 2023-06-12 version 1.3.0 - Change to hide Start from for extras
 
 2023-06-10 version 1.2.0 - Change to use min js, fix font size error, fix label wrapping

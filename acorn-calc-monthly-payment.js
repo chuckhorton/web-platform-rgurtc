@@ -59,7 +59,7 @@ function acornUpdateExtraServices () {
   const updatedLoanAmount = num1 + num2;
   // console.log('amount', document.getElementById('acorn-amount-input').value, updatedLoanAmount, num1, num2)
 
-  acornFinance.customCalcPayment(
+  let payInfo = acornFinance.customCalcPayment(
     updatedLoanAmount,
     'acorn-custom-payment-amount-value',
     'acorn-custom-button-div',
@@ -68,6 +68,8 @@ function acornUpdateExtraServices () {
     'Check offers at Acorn Finance'
   );
   document.getElementById("acorn-loan-amount").innerHTML = acornFormatCurrency(updatedLoanAmount);
+  let lowPay = acornFinance.calcLowPayment(updatedLoanAmount)
+  document.getElementById("acorn-loan-term").innerHTML = lowPay.years;
 }
 
 function acornUpdatePaymentAmount (value) {
@@ -93,6 +95,8 @@ function acornUpdatePaymentAmount (value) {
       'Check offers at Acorn Finance'
     );
     document.getElementById("acorn-loan-amount").innerHTML = acornFormatCurrency(acornParameters.loanAmount);
+    let lowPay = acornFinance.calcLowPayment(acornParameters.loanAmount)
+    document.getElementById("acorn-loan-term").innerHTML = lowPay.years;
     setExtraPaymentAmounts()
   }
 }

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="acorn-calc-monthly-payment.min.css" />
   <script async src="https://payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
-  <script async src="acorn-calc-monthly-payment.min.js"></script>
+  <script async src="acorn-calc-monthly-payment.js"></script>
 </head>
 
 <body onload="onLoadPageAcorn()">
@@ -129,9 +129,12 @@
             </div>
           </div>
           <div class="acorn-disclaimer-text">
-            This estimated monthly payment is based on a loan amount of <span id="acorn-loan-amount">$3200</span> loan
+            <!-- This estimated monthly payment is based on a loan amount of <span id="acorn-loan-amount">$3200</span> loan
             term, and APR ranges above. Actual rates, terms and payments will vary based on your personal credit
-            profile.
+            profile. -->
+            This estimated monthly payment is based on a loan amount of <span id="acorn-loan-amount">$3200</span> loan,
+            <span id="acorn-loan-term">5</span> year term, and APR ranges above. Actual rates, terms and payments will
+            vary based on your personal credit profile.
           </div>
           <div class="check-your-rate">
             <div class="acorn-loading acorn-custom-item" id="acorn-custom-button-div"></div>
