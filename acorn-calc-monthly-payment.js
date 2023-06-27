@@ -23,6 +23,10 @@ function onLoadPageAcorn () {
     // promoText: "quickly compare offers from top lenders &#8226; no impact to credit score",
     logging: true,
   };
+  let locHref = window.location.href
+  if (locHref.indexOf('/loans') > 0) {
+    acornParameters.dealerId = 'POD-WEBSITE-SSC'
+  }
   acornFinance.setAcornParameters(acornParameters);
 
   // add an appropriate event listener
