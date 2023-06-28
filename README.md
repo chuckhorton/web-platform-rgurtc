@@ -1,20 +1,8 @@
-# PODS Financing Page
+# PODS Loans Pages
 
 [See on StackBlitz ⚡️](https://stackblitz.com/edit/web-platform-rgurtc)
 
-Final PODS Calculate your monthly payment code snippet for PODS Financing Page
-
-2023-06-27 version 1.5.0 - Add auto set dealer id for www.pods.com/loans, add example page
-
-2023-06-13 version 1.4.0 - Add x year term to description
-
-2023-06-12 version 1.3.0 - Change to hide Start from for extras
-
-2023-06-10 version 1.2.0 - Change to use min js, fix font size error, fix label wrapping
-
-2023-06-09 version 1.1.0 - Fix add-on calcs
-
-2023-04-20 version 1.0.0 - First production ready version
+Final PODS Calculate your monthly payment code snippet for PODS Loan Pages
 
 # Instructions
 
@@ -62,4 +50,18 @@ Open index.html for example and code copying
      - for www.pods.com/moving-loans when should go to https://www.acornfinance.com/apply/?d=POD-WEBSITE-LP
      - for www.pods.com/loans when should go to https://www.acornfinance.com/apply/?d=POD-WEBSITE-SSC
 
-7. Share with Acorn when deployed and we will test and verify too.
+7. Share with Acorn when deployed and we will test and verifyAcorn to have Acorn review and test
+
+## Versions
+
+2023-06-27 version 1.5.0 - Add auto set dealer id for www.pods.com/loans, add example page
+
+2023-06-13 version 1.4.0 - Add x year term to description
+
+2023-06-12 version 1.3.0 - Change to hide Start from for extras
+
+2023-06-10 version 1.2.0 - Change to use min js, fix font size error, fix label wrapping
+
+2023-06-09 version 1.1.0 - Fix add-on calcs
+
+2023-04-20 version 1.0.0 - First production ready version
