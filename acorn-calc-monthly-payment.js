@@ -11,7 +11,7 @@
 window.onload = onLoadPageAcorn;
 
 // < Calculate your monthly payment Javascript
-function onLoadPageAcorn() {
+function onLoadPageAcorn () {
   acornParameters = {
     dealerId: 'POD-WEBSITE-LP', // POD-WEBSITE-LP
     companyName: 'PODS', // PODS company name
@@ -53,7 +53,7 @@ function onLoadPageAcorn() {
   }, delay);
 }
 
-function acornUpdateExtraServices() {
+function acornUpdateExtraServices () {
   var sum = 0;
   for (i = 0; i < document.listForm.choice.length; i++) {
     if (document.listForm.choice[i].checked) {
@@ -80,7 +80,7 @@ function acornUpdateExtraServices() {
   document.getElementById('acorn-loan-term').innerHTML = lowPay.years;
 }
 
-function acornUpdatePaymentAmount(value) {
+function acornUpdatePaymentAmount (value) {
   document.getElementById('labor').checked = false;
   document.getElementById('car-shipping').checked = false;
   document.getElementById('boxes').checked = false;
@@ -109,7 +109,7 @@ function acornUpdatePaymentAmount(value) {
   }
 }
 
-function setExtraPaymentAmounts() {
+function setExtraPaymentAmounts () {
   // Labor
   // console.log('setExtraPaymentAmounts', acornParameters.loanAmount)
   let lowLoanAmount = 1000;
@@ -142,7 +142,7 @@ function setExtraPaymentAmounts() {
   // console.log(acornParameters.loanAmount, lowLoanAmount, laLaborOnly, laCarShippingOnly, laBoxesOnly)
 }
 
-function acornLoadPaymentAmountWidget() {
+function acornLoadPaymentAmountWidget () {
   // console.log('acornLoadPaymentAmountWidget');
   acornParameters.loanAmount = 3200;
   document.getElementById('acorn-amount-input').value =
@@ -159,10 +159,13 @@ function acornLoadPaymentAmountWidget() {
     'page',
     'Check offers at Acorn Finance'
   );
+  // acorn-pby-link
+  document.getElementById('acorn-pby-link').href =
+    'https://www.acornfinance.com/?utm_source=PODS&utm_term=' + acornParameters.dealerId;
 }
 
 // Format Number Currency
-function acornFormatCurrency(value) {
+function acornFormatCurrency (value) {
   let formatted = Number(value).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -176,7 +179,7 @@ let rateRangesError = false;
 let partnerParams = {};
 let rateRangesLoading = false;
 acornLoadRateRanges();
-async function acornLoadRateRanges(rateRangesUrl = '') {
+async function acornLoadRateRanges (rateRangesUrl = '') {
   rateRangesUrl =
     rateRangesUrl ||
     `https://fs.acornfinance.com/lib/rates/acorn-rate-ranges.json`;
@@ -199,7 +202,7 @@ async function acornLoadRateRanges(rateRangesUrl = '') {
   }
 }
 
-function acornSetRanges() {
+function acornSetRanges () {
   // console.log('acornSetRanges Acorn rate ranges loaded', rateRanges)
   document.getElementById('acorn-low-term').innerHTML =
     rateRanges.months_low || '24';
@@ -211,7 +214,7 @@ function acornSetRanges() {
     rateRanges.rates_high || '36.00';
 }
 
-function acornScrollToTarget() {
+function acornScrollToTarget () {
   const element = document.getElementById('acorn-scroll-target');
   element.scrollIntoView();
 }
