@@ -14,9 +14,11 @@ Open index.html for example and code copying
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="acorn-calc-monthly-payment.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://payment-amount.acornfinance.com/v4/partners/pods/calc/acorn-calc-monthly-payment.min.css" />
   <script async src="https://payment-amount.acornfinance.com/v4/acorn-finance.min.js"></script>
-  <script async src="acorn-calc-monthly-payment-min.js"></script>
+  <script async
+    src="https://payment-amount.acornfinance.com/v4/partners/pods/calc/acorn-calc-monthly-payment.min.js"></script>
 </head>
 ```
 
@@ -54,7 +56,7 @@ Open index.html for example and code copying
 
 ## Versions
 
-2023-08-04 version 1.6.0 - Remove <body onload="onLoadPageAcorn()"> from <body> and in acorn-calc-monthly.js add window.onload = onLoadPageAcorn;
+2023-08-07 version 1.6.0 - Remove <body onload="onLoadPageAcorn()"> from <body> and in acorn-calc-monthly.js add window.onload = onLoadPageAcorn; and move to PAW JS
 
 2023-06-27 version 1.5.0 - Add auto set dealer id for www.pods.com/loans, add example page
 
