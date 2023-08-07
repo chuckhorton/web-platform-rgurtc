@@ -23,13 +23,13 @@ Open index.html for example and code copying
 1.1 Download acorn-calc-monthly-payment.min.css and replace on PODS server
 2.1 Download acorn-calc-monthly-payment-min.js and replace on PODS server
 
-2. ON BODY TAG do `onload="onLoadPageAcorn()`
+2. ON BODY TAG remove `onload="onLoadPageAcorn()`. This is now handled by acorn-calc-monthly-payment.js
 
 ```
-<body onload="onLoadPageAcorn()">
+<body>
 ```
 
-3. COPY CODE below and replace existing code
+3. COPY CODE below and replace existing code from index.html
    `<!-- Acorn Calculate your monthly payment HTML - CODE TO COPY -->`
    and above
    `<!-- END of CODE TO COPY  -->`
@@ -53,6 +53,8 @@ Open index.html for example and code copying
 7. Share with Acorn when deployed and we will test and verifyAcorn to have Acorn review and test
 
 ## Versions
+
+2023-08-04 version 1.6.0 - Remove <body onload="onLoadPageAcorn()"> from <body> and in acorn-calc-monthly.js add window.onload = onLoadPageAcorn;
 
 2023-06-27 version 1.5.0 - Add auto set dealer id for www.pods.com/loans, add example page
 
