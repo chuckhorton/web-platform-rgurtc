@@ -22,6 +22,8 @@ Open index.html for example and code copying
 </head>
 ```
 
+### No longer need
+
 1.1 Download acorn-calc-monthly-payment.min.css and replace on PODS server
 2.1 Download acorn-calc-monthly-payment-min.js and replace on PODS server
 
@@ -32,6 +34,7 @@ Open index.html for example and code copying
 ```
 
 3. COPY CODE below and replace existing code from index.html
+
    `<!-- Acorn Calculate your monthly payment HTML - CODE TO COPY -->`
    and above
    `<!-- END of CODE TO COPY  -->`
